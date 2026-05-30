@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="page">
       <div className="home-hero">
-        <h1 className="homte-title">Welcome to Arkham Shop</h1>
+        <h1 className="home-title">Welcome to Arkham Shop</h1>
         <p className="home-subtitle">
           Discover amazing arkham product at great prices.
         </p>
