@@ -1,11 +1,14 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProductById } from "../data/products.js";
+import { useCart } from "../context/CartContext.jsx";
+
 export default function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const navigate = useNavigate();
-
+  const { addToCart, cartItems } = useCart();
+  
   useEffect(() => {
     const productData = getProductById(id);
     if (!productData) {
@@ -19,6 +22,9 @@ export default function ProductDetails() {
     return <p>Loading...</p>;
   }
 
+  const productInCart = cartItems.find((item) => item.id === product.id);
+  const productQuantityLabel = productInCart ? `(${productInCart.quantity})` : '(0)';
+  
   return (
     <div className="page">
       <div className="container">
@@ -34,7 +40,7 @@ export default function ProductDetails() {
               className="btn btn-primary"
               onClick={() => addToCart(product.id)}
             >
-              {/* Add to Cart {productQuantityLabel} */}
+              Add to Cart {productQuantityLabel}
             </button>
           </div>
         </div>
